@@ -1,7 +1,7 @@
 import "react-router-dom";
 
 export const ROUTES = {
-  HOME: "/",
+  CONNECTION: "/",
   SIGN_IN: "/auth/sign-in",
   SUGN_UP: "/auth/sign-up",
 } as const;

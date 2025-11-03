@@ -18,8 +18,8 @@ export const router = createHashRouter([
         element: <ProtectedRoute />,
         children: [
           {
-            path: ROUTES.HOME,
-            lazy: () => import("@/pages/home.page"),
+            path: ROUTES.CONNECTION,
+            lazy: () => import("@/pages/connection.page"),
           },
         ],
       },
