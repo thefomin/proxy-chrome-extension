@@ -1,17 +1,17 @@
-import { createBrowserRouter, createHashRouter } from "react-router-dom";
-// import { Providers } from "./providers"
+import { createHashRouter } from "react-router-dom";
 import App from "./app";
 import { ROUTES } from "@/shared/config/routes";
 import { ProtectedRoute } from "./protected-route";
+import { Providers } from "./providers";
 
 // используем createHashRouter потому что расширения не имеют серверного роутинга
 //вместо localhost
 export const router = createHashRouter([
   {
     element: (
-      <>
+      <Providers>
         <App />
-      </>
+      </Providers>
     ),
     children: [
       {
