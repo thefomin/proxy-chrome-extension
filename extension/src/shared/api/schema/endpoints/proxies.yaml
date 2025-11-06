@@ -1,0 +1,82 @@
+schemas:
+  Proxy:
+    type: object
+    required:
+      - id
+      - proxy
+      - protocol
+      - ip
+      - port
+      - https
+      - anonymity
+      - score
+      - geolocation
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: "2a75a0a4-8f11-4e6e-91b1-12b9b8f1c842"
+      proxy:
+        type: string
+        example: "socks5://127.0.0.1:443"
+      protocol:
+        type: string
+        example: "socks5"
+      ip:
+        type: string
+        example: "127.0.0.1"
+      port:
+        type: integer
+        example: 31034
+      https:
+        type: boolean
+        example: false
+      anonymity:
+        type: string
+        example: "transparent"
+      score:
+        type: integer
+        example: 1
+      geolocation:
+        type: object
+        properties:
+          country:
+            type: string
+            example: "Russia"
+          tag:
+            type: string
+            example: "RU"
+          city:
+            type: string
+            example: "Moscow"
+
+getProxies:
+  summary: Get all proxies
+  responses:
+    "200":
+      description: List of proxies
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: "#/schemas/Proxy"
+
+getProxyId:
+  summary: Get proxy by id
+  parameters:
+    - in: path
+      name: id
+      required: true
+      schema:
+        type: string
+        format: uuid
+  responses:
+    "200":
+      description: Proxy found
+      content:
+        application/json:
+          schema:
+            $ref: "#/schemas/Proxy"
+    "404":
+      description: Proxy not found

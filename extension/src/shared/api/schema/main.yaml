@@ -1,0 +1,13 @@
+openapi: 3.0.0
+info:
+  title: Proxy API
+  description: API для получения и управления прокси-серверами
+  version: 1.0.0
+
+paths:
+  /proxies:
+    get:
+      $ref: "./endpoints/proxies.yaml#/getProxies"
+  /proxies/{id}:
+    get:
+      $ref: "./endpoints/proxies.yaml#/getProxyId"
