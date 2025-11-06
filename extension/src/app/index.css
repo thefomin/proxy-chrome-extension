@@ -14,7 +14,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   --radius: 0.625rem;
-  --background: oklch(58.06% 0.22234 27.797);
+  --background: rgb(34 36 41);
   --foreground: oklch(100% 0.00011 271.152);
   --card: oklch(1 0 0);
   --card-foreground: oklch(100% 0.00011 271.152);
