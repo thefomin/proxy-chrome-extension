@@ -1,13 +1,13 @@
 import {
   ConnectionControl,
   ConnectionLayout,
-  ConnectionStatus,
-} from "@/features/connection/ui";
+  ConnectionInfo,
+} from "@/features/proxy-connection/ui";
 
 const ConnectionPage = () => {
   return (
     <ConnectionLayout
-      status={<ConnectionStatus />}
+      status={<ConnectionInfo />}
       control={<ConnectionControl />}
     />
   );
