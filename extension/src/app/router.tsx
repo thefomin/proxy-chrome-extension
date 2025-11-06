@@ -3,8 +3,7 @@ import App from "./app";
 import { ROUTES } from "@/shared/config/routes";
 import { ProtectedRoute } from "./protected-route";
 import { Providers } from "./providers";
-
-// используем createHashRouter потому что расширения не имеют серверного роутинга
+//используем createHashRouter потому что расширения не имеют серверного роутинга
 //вместо localhost
 export const router = createHashRouter([
   {
@@ -19,7 +18,7 @@ export const router = createHashRouter([
         children: [
           {
             path: ROUTES.CONNECTION,
-            lazy: () => import("@/pages/connection.page"),
+            lazy: () => import("@/pages/proxy-connection.page"),
           },
         ],
       },
@@ -30,6 +29,10 @@ export const router = createHashRouter([
       {
         path: ROUTES.SUGN_UP,
         lazy: () => import("@/pages/auth/sign-up.page"),
+      },
+      {
+        path: ROUTES.PROXY_LIST,
+        lazy: () => import("@/pages/proxy-list.page"),
       },
     ],
   },
