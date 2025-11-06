@@ -3,8 +3,8 @@ import { proxyConfig, ProxyMessage } from "@/shared/config/proxy";
 console.log("service_worker working...");
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  if (message.type === ProxyMessage.CONNECT) {
-    chrome.proxy.settings.set(proxyConfig, async () => {
+  if (message.type === ProxyMessage.CONNECT && message.config) {
+    chrome.proxy.settings.set(message.config, async () => {
       console.log("PROXY ПОДКЛЮЧЕН");
       await chrome.storage.local.set({ proxyEnabled: true });
       sendResponse({ success: true });
