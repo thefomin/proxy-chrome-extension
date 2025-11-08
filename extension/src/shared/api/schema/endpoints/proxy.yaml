@@ -42,13 +42,13 @@ schemas:
         properties:
           country:
             type: string
-            example: "Russia"
+            example: "Россия"
           tag:
             type: string
             example: "RU"
           city:
             type: string
-            example: "Moscow"
+            example: "Москва"
 
 getProxies:
   summary: Get all proxies

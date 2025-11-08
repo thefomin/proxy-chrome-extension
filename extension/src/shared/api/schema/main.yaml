@@ -5,9 +5,9 @@ info:
   version: 1.0.0
 
 paths:
-  /proxies:
+  /proxy:
     get:
-      $ref: "./endpoints/proxies.yaml#/getProxies"
-  /proxies/{id}:
+      $ref: "./endpoints/proxy.yaml#/getProxies"
+  /proxy/{id}:
     get:
-      $ref: "./endpoints/proxies.yaml#/getProxyId"
+      $ref: "./endpoints/proxy.yaml#/getProxyId"

@@ -4,7 +4,7 @@
  */
 
 export interface paths {
-    "/proxies": {
+    "/proxy": {
         parameters: {
             query?: never;
             header?: never;
@@ -40,7 +40,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/proxies/{id}": {
+    "/proxy/{id}": {
         parameters: {
             query?: never;
             header?: never;
@@ -110,11 +110,11 @@ export interface components {
             /** @example 1 */
             score: number;
             geolocation: {
-                /** @example Russia */
+                /** @example Россия */
                 country?: string;
                 /** @example RU */
                 tag?: string;
-                /** @example Moscow */
+                /** @example Москва */
                 city?: string;
             };
         };
