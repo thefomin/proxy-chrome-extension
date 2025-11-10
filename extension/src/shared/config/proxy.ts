@@ -1,4 +1,4 @@
-export const STORAGE_KEY = "proxyEnabled";
+export const STORAGE_PROXY_KEY = "proxyEnabled";
 
 export const StorageArea = {
   LOCAL: "local" as const,
