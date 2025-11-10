@@ -1,0 +1,81 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "./generated"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+/*
+  Модель пользователей/авторизации для расширения:
+  - authId: уникальный идентификатор, состоящий только из цифр (например "1234567890")
+  - secret: опциональный секрет/токен для дополнительной аутентификации
+*/
+model ExtensionAuth {
+  id          String       @id @default(cuid())
+  authId      String       @unique                      // внешний уникальный идентификатор (только цифры) — для аутентификации расширения
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  subscription Subscription?
+  @@map("extension_auths")
+}
+
+/*
+  Подписка (премиум)
+  - isPaid: оплачена ли (bool)
+  - paidAt: когда оплатили (DateTime?)
+  - expiresAt: когда заканчивается подписка (DateTime?)
+  Можно расширить полями provider/amount/currency и т.д.
+*/
+model Subscription {
+  id        String        @id @default(cuid())
+  user      ExtensionAuth @relation(fields: [userId], references: [id])
+  userId    String     @unique
+  plan      String?  
+  isPaid    Boolean    @default(false)
+  paidAt    DateTime?
+  expiresAt DateTime?
+
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+
+  @@map("subscriptions")
+}
+
+
+model Geolocation {
+  id      String    @id @default(uuid())
+  country String?
+  tag     String? // 2-letter code e.g. "RU"
+  city    String?
+
+  proxy   Proxy[]
+  @@unique([country, tag, city], name: "country_tag_city")
+  @@map("geolocations")
+}
+
+/*
+  Proxy модель — соответствует твоему описанию.
+  id: UUID (как в примере на входе)
+  geolocation: relation на Geolocation
+*/
+model Proxy {
+  id          String      @id @default(uuid()) // формат: uuid (как в примере)
+  proxy       String      // пример: "socks5://127.0.0.1:443"
+  protocol    String      // "socks5"
+  ip          String      // "127.0.0.1"
+  port        Int
+  https       Boolean
+  anonymity   String      // "transparent"
+  score       Int
+  geolocation Geolocation? @relation(fields: [geolocationId], references: [id])
+  geolocationId String?
+
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  @@map("proxies")
+}
