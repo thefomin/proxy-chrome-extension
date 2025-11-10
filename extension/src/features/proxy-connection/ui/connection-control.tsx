@@ -40,9 +40,9 @@ export const ConnectionControl = () => {
         <FlagInfo country={errorMessage} tag="" city={errorMessage} />
       ) : (
         <FlagInfo
-          country={proxy?.geolocation.country || ""}
-          tag={proxy?.geolocation.tag || ""}
-          city={proxy?.geolocation.city || ""}
+          country={proxy?.geolocation?.country || ""}
+          tag={proxy?.geolocation?.tag || ""}
+          city={proxy?.geolocation?.city || ""}
         />
       )}
       <div className="flex flex-row gap-3">
