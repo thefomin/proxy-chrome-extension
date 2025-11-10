@@ -1,4 +1,5 @@
-import { proxyConfig, ProxyMessage } from "@/shared/config/proxy";
+import { ProxyMessage } from "@/shared/config/proxy";
+import { Session } from "@/shared/model/session-provider";
 
 console.log("service_worker working...");
 
@@ -18,5 +19,24 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       sendResponse({ success: true });
     });
     return true;
+  }
+});
+
+
+let session: Session = null;
+
+chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
+  switch (msg.type) {
+    case "GET_SESSION":
+      sendResponse({ session });
+      break;
+    case "SET_SESSION":
+      session = msg.session;
+      chrome.storage.local.set({ session });
+      break;
+    case "CLEAR_SESSION":
+      session = null;
+      chrome.storage.local.remove("session");
+      break;
   }
 });
