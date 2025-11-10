@@ -1,6 +1,6 @@
 import { createContext, useContext } from "react";
 import {
-  STORAGE_KEY,
+  STORAGE_PROXY_KEY,
   StorageArea,
   ProxyMessage,
   ProxySchema,
@@ -30,7 +30,7 @@ export const ProxyConnectionProvider = ({
   children: React.ReactNode;
 }) => {
   const [isConnected, setIsConnected] = useStorage<boolean>(
-    STORAGE_KEY,
+    STORAGE_PROXY_KEY,
     false,
     StorageArea.LOCAL
   );
@@ -38,7 +38,7 @@ export const ProxyConnectionProvider = ({
   const [searchParams, setSearchParams] = useSearchParams();
   //сюда нужно прикрутить получения данных через params и initialProxyId
   const proxyParamsId =
-    searchParams.get("proxyId") || "9fb8dd11-094d-4c9d-9a58-acca2aa11773";
+    searchParams.get("proxyId") || 'a38f7b2d-0f9d-4d1b-b47f-69bb50584b52';
 
   const { proxy, isPending, errorMessage } = useProxyById(proxyParamsId);
 
@@ -104,10 +104,10 @@ export const ProxyConnectionProvider = ({
 };
 
 export const useProxyConnection = () => {
-  const context = useContext(ProxyConnectionContext);
-  if (!context)
+  const ctx = useContext(ProxyConnectionContext);
+  if (!ctx)
     throw new Error(
       "useProxyConnection должен использоваться внутри ProxyConnectionProvider"
     );
-  return context;
+  return ctx;
 };
