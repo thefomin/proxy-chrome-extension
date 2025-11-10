@@ -1,0 +1,65 @@
+schemas:
+  Session:
+    type: object
+    required:
+      - authId
+    properties:
+      authId:
+        type: string
+        example: "1234567890123456"
+        
+  AuthRequest:
+    type: object
+    required:
+      - authId
+    properties:
+      authId:
+        type: string
+        example: "1234567890123456"
+
+  AuthError:
+    type: object
+    properties:
+      statusCode:
+        type: integer
+        example: 401
+      message:
+        type: string
+        example: "Неверный ключ авторизации"
+
+
+register:
+  summary: Register new user and get authId
+  requestBody:
+    required: false
+    content:
+      application/json: {}
+  responses:
+    "201":
+      description: Registration successful
+      content:
+        application/json:
+          schema:
+            $ref: "#/schemas/Session"
+
+login:
+  summary: Login by authId
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: "#/schemas/AuthRequest"
+  responses:
+    "200":
+      description: Login successful
+      content:
+        application/json:
+          schema:
+            $ref: "#/schemas/Session"
+    "401":
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: "#/schemas/AuthError"

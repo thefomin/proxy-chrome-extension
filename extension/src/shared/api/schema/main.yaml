@@ -5,6 +5,12 @@ info:
   version: 1.0.0
 
 paths:
+  /auth/register:
+    post:
+      $ref: './endpoints/auth.yaml#/register'
+  /auth/login:
+    post:
+      $ref: './endpoints/auth.yaml#/login'
   /proxy:
     get:
       $ref: "./endpoints/proxy.yaml#/getProxies"
