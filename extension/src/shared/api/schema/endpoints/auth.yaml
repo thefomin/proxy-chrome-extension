@@ -2,20 +2,38 @@ schemas:
   Session:
     type: object
     required:
-      - authId
+      - user
+      - proxyId
     properties:
-      authId:
+      user:
+        type: object
+        required:
+          - id
+          - authId
+          - createdAt
+          - updatedAt
+        properties:
+          id:
+            type: string
+            example: 'cmhvy8rrt0000cscjpm8jvbht'
+          authId:
+            type: string
+            example: '9015539273676022'
+          createdAt:
+            type: string
+            format: date-time
+            example: '2025-11-12T12:01:17.466Z'
+          updatedAt:
+            type: string
+            format: date-time
+            example: '2025-11-12T12:01:17.466Z'
+      proxyId:
         type: string
-        example: "1234567890123456"
-        
+        example: '2fecf42c-e95d-43df-8528-491e855e0de4'
+
   AuthRequest:
-    type: object
-    required:
-      - authId
-    properties:
-      authId:
-        type: string
-        example: "1234567890123456"
+    allOf:
+      - $ref: '#/components/schemas/Session'
 
   AuthError:
     type: object
@@ -25,8 +43,7 @@ schemas:
         example: 401
       message:
         type: string
-        example: "Неверный ключ авторизации"
-
+        example: 'Неверный ключ авторизации'
 
 register:
   summary: Register new user and get authId
@@ -35,12 +52,12 @@ register:
     content:
       application/json: {}
   responses:
-    "201":
+    '201':
       description: Registration successful
       content:
         application/json:
           schema:
-            $ref: "#/schemas/Session"
+            $ref: '#/schemas/Session'
 
 login:
   summary: Login by authId
@@ -49,17 +66,17 @@ login:
     content:
       application/json:
         schema:
-          $ref: "#/schemas/AuthRequest"
+          $ref: '#/schemas/AuthRequest'
   responses:
-    "200":
+    '200':
       description: Login successful
       content:
         application/json:
           schema:
-            $ref: "#/schemas/Session"
-    "401":
+            $ref: '#/schemas/Session'
+    '401':
       description: Unauthorized
       content:
         application/json:
           schema:
-            $ref: "#/schemas/AuthError"
+            $ref: '#/schemas/AuthError'
