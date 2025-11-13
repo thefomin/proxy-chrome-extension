@@ -1,18 +1,11 @@
-import { useProxyConnection } from "@/features/proxy-connection/model/proxy-connection-provider";
-import { Button, FlagInfo } from "@/shared/ui";
-import { useNavigate } from "react-router-dom";
+import { useProxyConnection } from '@/features/proxy-connection/model/proxy-connection-provider';
+import { Button, FlagInfo } from '@/shared/ui';
+import { useNavigate } from 'react-router-dom';
 
 export const ConnectionControl = () => {
   const navigate = useNavigate();
-  const {
-    isConnected,
-    connectProxy,
-    disconnectProxy,
-    proxy,
-    isPending,
-    errorMessage,
-    proxyParamsId,
-  } = useProxyConnection();
+  const { isConnected, connectProxy, disconnectProxy, proxy, isPending, errorMessage } =
+    useProxyConnection();
 
   const ProxyButton = () => (
     <>
@@ -20,15 +13,14 @@ export const ConnectionControl = () => {
         className="w-full rounded-xl text-background bg-green-300"
         onClick={isConnected ? disconnectProxy : connectProxy}
       >
-        {isConnected ? "Отключиться" : "Подключиться"}
+        {isConnected ? 'Отключиться' : 'Подключиться'}
       </Button>
     </>
   );
 
   const handleOpenList = () => {
     navigate({
-      pathname: "/proxy-list",
-      search: `?proxyId=${proxyParamsId}`,
+      pathname: '/proxy-list',
     });
   };
 
@@ -40,9 +32,9 @@ export const ConnectionControl = () => {
         <FlagInfo country={errorMessage} tag="" city={errorMessage} />
       ) : (
         <FlagInfo
-          country={proxy?.geolocation?.country || ""}
-          tag={proxy?.geolocation?.tag || ""}
-          city={proxy?.geolocation?.city || ""}
+          country={proxy?.geolocation?.country || ''}
+          tag={proxy?.geolocation?.tag || ''}
+          city={proxy?.geolocation?.city || ''}
         />
       )}
       <div className="flex flex-row gap-3">
