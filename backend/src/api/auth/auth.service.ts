@@ -7,18 +7,20 @@ export class AuthService {
 
   async register() {
     const authId = Array.from({ length: 16 }, () =>
-      Math.floor(Math.random() * 10)
+      Math.floor(Math.random() * 10),
     ).join('');
 
     const user = await this.prismaService.extensionAuth.create({
       data: { authId },
     });
 
-    return { authId: user.authId };
+    const proxy = await this.prismaService.proxy.findFirst();
+
+    return { authId: user.authId, proxyId: proxy?.id };
   }
 
- public async findUserById(authId: string) {
-  console.log('auth ', JSON.stringify(authId))
+  public async findUserById(authId: string) {
+    console.log('auth ', JSON.stringify(authId));
     return await this.prismaService.extensionAuth.findUnique({
       where: { authId },
     });
@@ -26,13 +28,13 @@ export class AuthService {
 
   async login(dto: { authId: string }) {
     const user = await this.findUserById(dto.authId);
-
+    const proxy = await this.prismaService.proxy.findFirst();
     if (!user) {
       throw new UnauthorizedException(
-        'Пользователя с таким ключом не существует.'
+        'Пользователя с таким ключом не существует.',
       );
     }
 
-    return user;
+    return { user, proxyId: proxy?.id };
   }
 }
