@@ -1,21 +1,26 @@
+import CircleSvg from './ui/svg-icon';
+
 interface AuthLayoutProps {
-  logo: React.ReactNode;
   title: string;
-  description: string;
-  action: React.ReactNode;
+  description: React.ReactNode;
+  actions: React.ReactNode;
 }
 
-export const AuthLayout = ({ logo, title, description, action }: AuthLayoutProps) => {
+export const AuthLayout = ({ title, description, actions }: AuthLayoutProps) => {
   return (
-    <div className="flex p-4 items-center justify-center w-full flex-1">
-      <div className="flex flex-col justify-between h-full min-h-[300px] w-full">
-        <div className="items-center flex justify-center">{logo}</div>
-        <div className="mt-4 flex items-center flex-col">
-          <h1 className="text-2xl font-bold">{title}</h1>
-          <span className="text-[14px]">{description}</span>
+    <section className="flex p-4 items-center justify-center w-[390px] flex-1 h-full relative">
+      <div className="flex flex-col justify-end gap-16 h-full min-h-[300px] w-full">
+        <div className="absolute left-0 -top-5 z-0 items-center flex justify-center blur-sm">
+          <div className="scale-110 animation-spin">
+            <CircleSvg />
+          </div>
         </div>
-        {action}
+        <div className="mt-4 flex items-center flex-col gap-4">
+          <h1 className="text-3xl font-semibold z-10 w-64 text-center">{title}</h1>
+          <span className="text-base z-10">{description}</span>
+        </div>
+        {actions}
       </div>
-    </div>
+    </section>
   );
 };
