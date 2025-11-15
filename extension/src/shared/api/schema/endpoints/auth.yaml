@@ -8,10 +8,7 @@ schemas:
       user:
         type: object
         required:
-          - id
           - authId
-          - createdAt
-          - updatedAt
         properties:
           id:
             type: string
@@ -32,8 +29,16 @@ schemas:
         example: '2fecf42c-e95d-43df-8528-491e855e0de4'
 
   AuthRequest:
-    allOf:
-      - $ref: '#/components/schemas/Session'
+    type: object
+    required:
+      - authId
+    properties:
+      authId:
+        type: string
+        example: '9015539273676022'
+      proxyId:
+        type: string
+        example: '2fecf42c-e95d-43df-8528-491e855e0de4'
 
   AuthError:
     type: object
