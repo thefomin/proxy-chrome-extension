@@ -35,4 +35,8 @@ export class CreateProxyDto {
   @IsOptional()
   @IsString()
   city?: string;
+
+  @IsOptional()
+  @IsString()
+  geolocationId?: string;
 }
