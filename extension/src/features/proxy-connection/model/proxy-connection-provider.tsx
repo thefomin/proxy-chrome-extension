@@ -27,7 +27,7 @@ export const ProxyConnectionProvider = ({ children }: { children: React.ReactNod
 
   const { proxy, isPending, errorMessage } = useProxyById(session?.proxyId || '');
 
-  const setProxyParamsId = (id: string) => {
+  const setProxyParamsId = async (id: string) => {
     chrome.runtime.sendMessage({ type: 'SET_PROXY_ID', proxyId: id });
     console.log('Set proxy ID to', id);
   };
