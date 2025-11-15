@@ -4,7 +4,6 @@ import { StorageArea } from '../config/chrome-storage';
 
 export type Session = {
   user: {
-    id: string;
     authId: string;
   };
   proxyId: string;
