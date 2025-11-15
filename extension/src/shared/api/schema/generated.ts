@@ -181,24 +181,29 @@ export interface components {
         Session: {
             user: {
                 /** @example cmhvy8rrt0000cscjpm8jvbht */
-                id: string;
+                id?: string;
                 /** @example 9015539273676022 */
                 authId: string;
                 /**
                  * Format: date-time
                  * @example 2025-11-12T12:01:17.466Z
                  */
-                createdAt: string;
+                createdAt?: string;
                 /**
                  * Format: date-time
                  * @example 2025-11-12T12:01:17.466Z
                  */
-                updatedAt: string;
+                updatedAt?: string;
             };
             /** @example 2fecf42c-e95d-43df-8528-491e855e0de4 */
             proxyId: string;
         };
-        AuthRequest: components["schemas"]["Session"];
+        AuthRequest: {
+            /** @example 9015539273676022 */
+            authId: string;
+            /** @example 2fecf42c-e95d-43df-8528-491e855e0de4 */
+            proxyId?: string;
+        };
         AuthError: {
             /** @example 401 */
             statusCode?: number;
