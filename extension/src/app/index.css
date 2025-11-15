@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -7,26 +7,25 @@
 
   color-scheme: dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   --radius: 0.625rem;
-  --background: rgb(34 36 41);
-  --foreground: oklch(100% 0.00011 271.152);
-  --card: oklch(1 0 0);
+  --background: rgba(2, 7, 18);
+  --foreground: rgb(255, 255, 255);
+  --card: rgb(46, 49, 59);
   --card-foreground: oklch(100% 0.00011 271.152);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.141 0.005 285.823);
   --primary: oklch(0.21 0.006 285.885);
   --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.967 0.001 286.375);
+  --secondary: rgb(32, 35, 45);
   --secondary-foreground: oklch(0.21 0.006 285.885);
   --muted: oklch(0.967 0.001 286.375);
   --muted-foreground: oklch(0.552 0.016 285.938);
-  --accent: oklch(0.967 0.001 286.375);
+  --accent: rgb(109, 32, 210);
   --accent-foreground: oklch(0.21 0.006 285.885);
   --destructive: oklch(0.577 0.245 27.325);
   --border: oklch(0.92 0.004 286.32);
@@ -91,15 +90,46 @@ body {
   display: flex;
   min-width: 450px;
   min-height: 100vh;
-  background: #1a1c1f;
+  background: rgba(2, 7, 18);
   color: #dae5f5;
-  min-width: 360px;
+  min-width: 390px;
+  max-width: 390px;
   min-height: 600px;
 }
 
 @layer base {
   button:not(:disabled),
-  [role="button"]:not(:disabled) {
+  [role='button']:not(:disabled) {
     cursor: pointer;
+  }
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE и Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.animation-spin {
+  display: inline-block;
+  /* transform-origin: 50% 50%; */
+  animation: spin 5s linear infinite, pulse 5s ease-in-out infinite alternate;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse {
+  50% {
+    opacity: 0.8;
   }
 }
