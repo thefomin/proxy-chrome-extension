@@ -51,6 +51,8 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         proxyId: message.proxyId,
       };
 
+      session = updatedSession;
+
       chrome.storage.local.set({ session: updatedSession });
     });
     return true;
