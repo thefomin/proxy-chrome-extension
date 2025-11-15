@@ -1,20 +1,19 @@
 interface ConnectionLayoutProps {
-  status: React.ReactNode;
-  control: React.ReactNode;
+  tab: React.ReactNode;
+  switcher: React.ReactNode;
+  connection: React.ReactNode;
 }
 
-export const ConnectionLayout = ({
-  status,
-  control,
-}: ConnectionLayoutProps) => {
+export const ConnectionLayout = ({ tab, switcher, connection }: ConnectionLayoutProps) => {
   return (
-    <section className="w-full h-screen flex flex-col items-center justify-end p-4 overflow-hidden">
-      <div className="h-full w-full overflow-hidden rounded-b-3xl ">
-        <div className="relative w-full flex h-full ">
-          {status}
-          {control}
+    <>
+      {tab}
+      <section className="w-[390px] pt-16 pb-28 flex flex-col p-4 overflow-hidden gap-4 items-center justify-center h-full">
+        <div className="w-full flex flex-col p-4 gap-2 rounded-3xl overflow-scroll no-scrollbar">
+          {switcher}
         </div>
-      </div>
-    </section>
+      </section>
+      {connection}
+    </>
   );
 };
