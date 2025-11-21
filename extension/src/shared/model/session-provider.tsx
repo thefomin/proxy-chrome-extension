@@ -3,7 +3,10 @@ import { useStorage } from '@/shared/model/use-storage';
 import { StorageArea } from '../config/chrome-storage';
 
 export type Session = {
-  authId: string;
+  user: {
+    authId: string;
+  };
+  proxyId: string;
 } | null;
 
 type SessionContextType = {

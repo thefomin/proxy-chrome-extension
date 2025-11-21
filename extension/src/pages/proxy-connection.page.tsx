@@ -1,14 +1,16 @@
 import {
-  ConnectionControl,
   ConnectionLayout,
-  ConnectionInfo,
-} from "@/features/proxy-connection/ui";
+  ConnectionSwitcher,
+  ConnectionControl,
+} from '@/features/proxy-connection/ui';
+import { Header } from '@/shared/ui';
 
 const ConnectionPage = () => {
   return (
     <ConnectionLayout
-      status={<ConnectionInfo />}
-      control={<ConnectionControl />}
+      tab={<Header title="Подключение" />}
+      switcher={<ConnectionSwitcher />}
+      connection={<ConnectionControl />}
     />
   );
 };

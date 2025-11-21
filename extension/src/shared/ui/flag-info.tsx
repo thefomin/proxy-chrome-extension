@@ -1,5 +1,5 @@
-import { CircleFlag } from "react-circle-flags";
-import { cn } from "../lib/css";
+import { CircleFlag } from 'react-circle-flags';
+import { cn } from '../lib/css';
 
 interface FlagInfoProps {
   country: string;
@@ -10,7 +10,7 @@ interface FlagInfoProps {
 
 export const FlagInfo = ({ country, tag, city, className }: FlagInfoProps) => {
   return (
-    <div className={cn("flex flex-row gap-3 items-center", className)}>
+    <div className={cn('flex flex-row gap-3 items-center', className)}>
       <div className="flex items-center justify-center h-10 w-10 rounded-full text-2xl">
         <CircleFlag
           countryCode={tag.toLowerCase()}

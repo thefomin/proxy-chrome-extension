@@ -1,18 +1,17 @@
 import { rqClient } from '@/shared/api/instance.api';
 import { useSession } from '@/shared/model/session-provider';
 
-const PROXY_KEY = 'PROXY';
+const PROXY_KEY = 'PROXY-LIST';
 
-export function useProxyById(id: string) {
+export function useProxy() {
   const { session } = useSession();
+  if (!session) null;
 
-  const userQuery = rqClient.useQuery('get', '/proxy/{id}', {
-    params: {
-      path: { id },
+  const userQuery = rqClient.useQuery('get', '/proxy', {
+    queryKey: [PROXY_KEY],
+    headers: {
+      'x-auth-id': session?.user.authId ?? null,
     },
-    queryKey: [PROXY_KEY, id],
-    headers: session ? { 'x-auth-id': session.user.authId } : undefined,
-    enabled: !!session,
   });
 
   const errorMessage = userQuery.isError ? userQuery.error : undefined;

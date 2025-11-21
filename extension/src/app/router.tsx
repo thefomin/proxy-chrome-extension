@@ -1,39 +1,47 @@
-import { createHashRouter } from "react-router-dom";
-import App from "./app";
-import { ROUTES } from "@/shared/config/routes";
-import { ProtectedRoute } from "./protected-route";
-import { Providers } from "./providers";
-//используем createHashRouter потому что расширения не имеют серверного роутинга
-//вместо localhost
-export const router = createHashRouter([
-  {
-    element: (
-      <Providers>
-        <App />
-      </Providers>
-    ),
-    children: [
-      {
-        element: <ProtectedRoute />,
-        children: [
+import { useEffect, useState } from 'react';
+import './index.css';
+import { RouterProvider as Provider, createHashRouter } from 'react-router-dom';
+import { ROUTES } from '@/shared/config/routes';
+import App from './app';
+import { ProtectedRoute } from './protected-route';
+import { Providers } from './providers';
+
+export const RouterProvider = () => {
+  const [router, setRouter] = useState<any>(null);
+
+  useEffect(() => {
+    chrome.storage.local.get(['lastRoute'], (result) => {
+      const lastRoute = result.lastRoute || ROUTES.CONNECTION;
+
+      if (window.location.hash.slice(1) !== lastRoute) {
+        window.location.hash = lastRoute;
+      }
+
+      setRouter(
+        createHashRouter([
           {
-            path: ROUTES.CONNECTION,
-            lazy: () => import("@/pages/proxy-connection.page"),
+            element: (
+              <Providers>
+                <App />
+              </Providers>
+            ),
+            children: [
+              {
+                element: <ProtectedRoute />,
+                children: [
+                  { path: ROUTES.CONNECTION, lazy: () => import('@/pages/proxy-connection.page') },
+                  { path: ROUTES.PROXY_LIST, lazy: () => import('@/pages/proxy-list.page') },
+                ],
+              },
+              { path: ROUTES.AUTH, lazy: () => import('@/pages/auth.page') },
+            ],
           },
-        ],
-      },
-      {
-        path: ROUTES.SIGN_IN,
-        lazy: () => import("@/pages/auth/sign-in.page"),
-      },
-      {
-        path: ROUTES.SUGN_UP,
-        lazy: () => import("@/pages/auth/sign-up.page"),
-      },
-      {
-        path: ROUTES.PROXY_LIST,
-        lazy: () => import("@/pages/proxy-list.page"),
-      },
-    ],
-  },
-]);
+        ])
+      );
+    });
+  }, []);
+
+  if (!router) return null;
+
+  return <Provider router={router} />;
+};
